@@ -1,13 +1,8 @@
-import "./App.css";
-import HeavyComponent from "./components/HeavyComponent";
-import LightComponenet from "./components/LightComponenet";
+
 
 function App() {
   return (
     <>
-      <LightComponenet/>
-      <br /><br /><br />
-      <HeavyComponent/>
     </>
   );
 }
