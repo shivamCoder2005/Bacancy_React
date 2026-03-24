@@ -1,5 +1,5 @@
 import "./App.css";
-import Demo from "./components/Form";
+import Demo from "./components/withAuth";
 
 function App() {
   return (
