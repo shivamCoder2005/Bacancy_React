@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CartContext, CartProduct, Product } from "../types";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 type Props = {
   children: ReactNode;
@@ -16,7 +17,9 @@ export function useCartContext() {
 }
 
 const CartContextProvider = ({ children }: Props) => {
-  const [cartState, setCartState] = useState<CartProduct[]>([]);
+  const { data: cartState, setData: setCartState } = useLocalStorage<
+    CartProduct[]
+  >([], "cart");
 
   function addToCart(product: Product) {
     const result = cartState.find((item) => item.id === product.id);

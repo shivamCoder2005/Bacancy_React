@@ -99,97 +99,106 @@ const Dashboard2 = () => {
   return (
     <div className="dashboard">
       <h2>Dashboard2</h2>
-      <div className="controls">
-        <label htmlFor="search">Search:</label>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          value={options.search}
-          onChange={handleChange}
-        />
+      <div className="layout">
+        <div className="main-content">
+          <div className="controls">
+            <label htmlFor="search">Search:</label>
+            <input
+              type="text"
+              name="search"
+              id="search"
+              value={options.search}
+              onChange={handleChange}
+            />
 
-        <label htmlFor="limit">Enter Limit :-</label>
-        <input
-          type="number"
-          name="limit"
-          id="limit"
-          value={options.limit}
-          min={0}
-          onChange={handleChange}
-        />
+            <label htmlFor="limit">Enter Limit :-</label>
+            <input
+              type="number"
+              name="limit"
+              id="limit"
+              value={options.limit}
+              min={0}
+              onChange={handleChange}
+            />
 
-        <select name="sortBy" value={options.sortBy} onChange={handleChange}>
-          <option value="">Sort By</option>
-          <option value="price">Price</option>
-          <option value="rating">Rating</option>
-        </select>
-
-        <select name="order" value={options.order} onChange={handleChange}>
-          <option value="">Order</option>
-          <option value="asc">Low → High</option>
-          <option value="desc">High → Low</option>
-        </select>
-
-        {allCategory.length > 0 && (
-          <>
-            <label htmlFor="category">Category:</label>
             <select
-              name="category"
-              id="category"
-              value={options.category}
+              name="sortBy"
+              value={options.sortBy}
               onChange={handleChange}
             >
-              <option value="">Select Category</option>
-              {allCategory.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
+              <option value="">Sort By</option>
+              <option value="price">Price</option>
+              <option value="rating">Rating</option>
             </select>
-          </>
-        )}
-        <button onClick={clearFilter}>Remove All Filters</button>
+
+            <select name="order" value={options.order} onChange={handleChange}>
+              <option value="">Order</option>
+              <option value="asc">Low → High</option>
+              <option value="desc">High → Low</option>
+            </select>
+
+            {allCategory.length > 0 && (
+              <>
+                <label htmlFor="category">Category:</label>
+                <select
+                  name="category"
+                  id="category"
+                  value={options.category}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Category</option>
+                  {allCategory.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
+            <button onClick={clearFilter}>Remove All Filters</button>
+          </div>
+          <ProductList products={productData.products} />
+
+          {!error && (
+            <>
+              <div className="stats">
+                <div className="stat-box">
+                  <div className="stat-label">Total Results</div>
+                  <div className="stat-value">{totalItems}</div>
+                </div>
+
+                <div className="stat-box">
+                  <div className="stat-label">Current Page</div>
+                  <div className="stat-value">
+                    {options.limit > 0
+                      ? Math.floor(options.skip / options.limit) + 1
+                      : 1}
+                  </div>
+                </div>
+
+                <div className="stat-box">
+                  <div className="stat-label">Total Pages</div>
+                  <div className="stat-value">
+                    {options.limit > 0
+                      ? Math.ceil(totalItems / options.limit)
+                      : 1}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pagination">
+                {options.skip > 0 && options.limit <= totalItems && (
+                  <button onClick={handlePrev}>Prev</button>
+                )}
+                {options.skip + productData.products.length < totalItems && (
+                  <button onClick={handleNext}>Next Page</button>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+        <Cart />
       </div>
-      <Cart />
-
-      <ProductList products={productData.products} />
-
-      {!error && (
-        <>
-          <div className="stats">
-            <div className="stat-box">
-              <div className="stat-label">Total Results</div>
-              <div className="stat-value">{totalItems}</div>
-            </div>
-
-            <div className="stat-box">
-              <div className="stat-label">Current Page</div>
-              <div className="stat-value">
-                {options.limit > 0
-                  ? Math.floor(options.skip / options.limit) + 1
-                  : 1}
-              </div>
-            </div>
-
-            <div className="stat-box">
-              <div className="stat-label">Total Pages</div>
-              <div className="stat-value">
-                {options.limit > 0 ? Math.ceil(totalItems / options.limit) : 1}
-              </div>
-            </div>
-          </div>
-
-          <div className="pagination">
-            {options.skip > 0 && options.limit <= totalItems && (
-              <button onClick={handlePrev}>Prev</button>
-            )}
-            {options.skip + productData.products.length < totalItems && (
-              <button onClick={handleNext}>Next Page</button>
-            )}
-          </div>
-        </>
-      )}
 
       {error && <span>{error}</span>}
     </div>

@@ -216,3 +216,137 @@ button:disabled {
   color: red;
   font-size: 14px;
 }
+
+/* Layout Split */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Left content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.cart-container {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+/* Scrollable cart list */
+.cart-list {
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-bottom: 12px;
+}
+
+/* Each item */
+.cart-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+.cart-card:hover {
+  background: #f3f4f6;
+}
+
+/* Info */
+.cart-info h3 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.cart-info .category {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.cart-info .price {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Actions */
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+/* Quantity buttons */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quantity-control button {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #e5e7eb;
+  color: #111;
+  font-size: 14px;
+}
+
+.quantity-control span {
+  font-size: 13px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Remove button */
+.remove-btn {
+  background: transparent;
+  color: #ef4444;
+  font-size: 12px;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
+
+/* Total section */
+.cart-total {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 10px;
+  margin-top: auto;
+}
+
+.cart-total h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Empty state */
+.empty-cart {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
