@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { Product, Option, ProductDataRespone } from "../types";
-import Card from "./Card";
 import ProductList from "./ProductList";
+import Cart from "./Cart";
 
 const baseUrl = "https://dummyjson.com/products";
 
@@ -46,9 +46,9 @@ const Dashboard = () => {
         typeof value === "string" ? value !== "" : value >= 0,
       )
       .map((arr) => arr.join("="))
-      .join("&&");
+      .join("&");
     if (options.search) {
-      return baseUrl + `/search?q=${options.search}` + "&&" + optionsUrl;
+      return baseUrl + `/search?q=${options.search}` + "&" + optionsUrl;
     }
     if (options.category) {
       return baseUrl + `/category/${options.category}` + "?" + optionsUrl;
@@ -188,6 +188,8 @@ const Dashboard = () => {
         )}
         <button onClick={clearFilter}>Remove All Filters</button>
       </div>
+
+      <Cart/>
       {/* Products */}
       <ProductList products={products} />
 

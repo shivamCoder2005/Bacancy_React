@@ -24,4 +24,16 @@ type ProductDataRespone = {
     total: number
 }
 
-export type { Product, Option,ProductDataRespone }
+type CartProduct = Omit<Product, "thumbnail" | "rating" | "stock"> & { quantity: number }
+
+
+
+type CartContext = {
+    cart: CartProduct[]
+    addToCart: (product: Product) => void
+    removeFromCart: (id: number) => void
+    updateCart: (id: number, newQuantity: number) => void
+}
+
+
+export type { Product, Option, ProductDataRespone, CartContext, CartProduct }

@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import type { ProductDataRespone, Option } from "../types";
 import useDebounce from "../hooks/useDebounce";
 import ProductList from "./ProductList";
+import Cart from "./Cart";
 
 const initProductData: ProductDataRespone = {
   products: [],
@@ -150,6 +151,8 @@ const Dashboard2 = () => {
         )}
         <button onClick={clearFilter}>Remove All Filters</button>
       </div>
+      <Cart />
+
       <ProductList products={productData.products} />
 
       {!error && (
