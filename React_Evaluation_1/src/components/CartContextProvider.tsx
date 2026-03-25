@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, type ReactNode } from "react";
 import type { CartContext, CartProduct, Product } from "../types";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -21,30 +21,34 @@ const CartContextProvider = ({ children }: Props) => {
     CartProduct[]
   >([], "cart");
 
-  function addToCart(product: Product) {
-    const result = cartState.find((item) => item.id === product.id);
-    if (result) {
-      updateCart(product.id, result.quantity + 1);
-      return;
-    }
-    setCartState((prev) => [...prev, { ...product, quantity: 1 }]);
-  }
+  const addToCart = useCallback((product: Product) => {
+    setCartState((prev) => {
+      const result = prev.find((item) => item.id === product.id);
+      if (!result) return [...prev, { ...product, quantity: 1 }];
+      return prev.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item,
+      );
+    });
+  }, []);
 
-  function removeFromCart(id: number) {
+  const removeFromCart = useCallback((id: number) => {
     setCartState((prev) => prev.filter((item) => item.id !== id));
-  }
+  }, []);
 
-  function updateCart(id: number, newQuantity: number) {
-    if (newQuantity < 1) {
-      removeFromCart(id);
-      return;
-    }
-    setCartState((prev) =>
-      prev.map((item) =>
+  const updateCart = useCallback((id: number, newQuantity: number) => {
+    setCartState((prev) => {
+      if (newQuantity < 1) {
+        return prev.filter((item) => item.id !== id);
+      }
+      return prev.map((item) =>
         item.id === id ? { ...item, quantity: newQuantity } : item,
-      ),
-    );
-  }
+      );
+    });
+  }, []);
+
+  
 
   return (
     <>
