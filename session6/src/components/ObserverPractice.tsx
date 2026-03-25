@@ -17,7 +17,7 @@ const ObserverPractice = () => {
           console.log("nathi dekhatu");
         }
       },
-      { threshold: 0.2, rootMargin: "200px" },
+      { threshold: 0.2 },
     );
     if (targetRef.current) {
       observer.observe(targetRef.current);
