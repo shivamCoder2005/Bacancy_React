@@ -48,12 +48,11 @@ const CartContextProvider = ({ children }: Props) => {
     });
   }, []);
 
-  
 
   return (
     <>
       <CartContext.Provider
-        value={{ cart: cartState, addToCart, removeFromCart, updateCart }}
+        value={{ cart: cartState, addToCart, removeFromCart, updateCart}}
       >
         {children}
       </CartContext.Provider>

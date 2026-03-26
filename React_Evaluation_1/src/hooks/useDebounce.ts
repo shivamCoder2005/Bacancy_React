@@ -7,7 +7,6 @@ function useDebounce<T>(value: T, delay: number): { debouncedState: T } {
     useEffect(() => {
         const timerId = setTimeout(() => {
             setDebouncedState(value)
-            console.log("debounced value is changed now.....",value)
         }, delay)
         return () => clearTimeout(timerId)
     }, [value])

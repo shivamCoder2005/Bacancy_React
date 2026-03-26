@@ -7,7 +7,7 @@ type Props = {
 };
 
 const ProductList = ({ products }: Props) => {
-  const { addToCart, updateCart } = useCartContext();
+  const { cart, addToCart, updateCart } = useCartContext();
   return (
     <>
       {products.length > 0 ? (
@@ -18,6 +18,7 @@ const ProductList = ({ products }: Props) => {
               data={product}
               addToCart={addToCart}
               updateCart={updateCart}
+              cartItem={cart.find((item) => item.id === product.id)}
             />
           ))}
         </div>
